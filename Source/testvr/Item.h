@@ -22,6 +22,7 @@ enum class MaterialType : uint8
 UENUM(Blueprintable)
 enum class WeaponType : uint8
 {
+	kNone,
 	kSword,
 	kAxe,
 	kLance,
@@ -55,25 +56,62 @@ public:
 
 	//Change Item States
 
-	UFUNCTION(BlueprintCallable)
-	bool SetIngot();
 	//UFUNCTION(BlueprintCallable)
 	//void SetWeapon(WeaponType type);
+
+
+// Ore State
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
+	float maxHeatRequired= 20.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
+	float qualityDecreaseRate = 1.f; // Per 1.f extra heat.
+
+	int furnaceId = -1;
+
+	// increases heat and returns if can change to ingot.
+	bool IncreaseHeat(float heat);
+	void CalculateIngotQuality();
+
+private:	
+	float mCurrentHeat = 0.f;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
-	float mItemQuality;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
-	ItemState mState;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
-	WeaponType mWeaponType;
+// Global State
+public: 
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+	// Setters
+	UFUNCTION(BlueprintCallable)
+	void SetQuality(float quality) { mItemQuality = quality; }
+	UFUNCTION(BlueprintCallable)
+	void SetState(ItemState state) { mState = state; }
+	UFUNCTION(BlueprintCallable)
+	void SetWeaponType(WeaponType type) { mWeaponType = type; }
+	UFUNCTION(BlueprintCallable)
+	void SetGrab(bool grab) { mIsGrabbed = grab; }
+
+	// Getters
+	UFUNCTION(BlueprintCallable)
+	float GetQuality() { return mItemQuality; }
+	UFUNCTION(BlueprintCallable)
+	ItemState GetState() { return mState; }
+	UFUNCTION(BlueprintCallable)
+	WeaponType GetWeaponType() { return mWeaponType; }
+	UFUNCTION(BlueprintCallable)
+	bool GetGrab() { return mIsGrabbed; }
+
+
+protected:
+
+	float mItemQuality = 1.f;
+	ItemState mState;
+	WeaponType mWeaponType;
 	MaterialType mMaterialType;
+	bool mIsGrabbed = false;
 
 };

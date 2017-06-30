@@ -28,25 +28,31 @@ public:
 	UFUNCTION(BlueprintCallable)		
 	void Activate();
 
+	UFUNCTION(BlueprintCallable)
+	void AddOre(AItem* item);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveItem(AItem* item);
+
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Furnace)
-	int maxWeapons;
+	int maxOre;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Furnace)
 	float maxHeat;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Furnace)
-	float heatDecreaseRate;
+	float heatDecreaseMultiplier = 1.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Upgrade)
 	int cost;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Upgrade)
-	int maxWeaponIncrease;
+	int maxOreIncrease;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Upgrade)
-	int maxHeatIncrease;
+	float maxHeatIncrease;
 
 private:
 	float mCurrentHeat = 0;
