@@ -41,19 +41,23 @@ public:
 	void AddPenetration(float pen);
 
 	UFUNCTION(BlueprintCallable)
-	float GetQuality();
+	// Get quality between 0 and 1
+	float GetQuality(); 
 
 
 protected:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool isActive = false;
+	UPROPERTY(BlueprintReadOnly)
+	bool isActive = false;	
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float currPositionRandomizer = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	float totalPenetration = 0.f;
+
+	UPROPERTY(BlueprintReadOnly)
+	float mLeftWidgetPosition = 0.f;
+
+	UPROPERTY(BlueprintReadOnly)
+	float mRightWidgetPosition = 0.f;
 
 private:
 	FRandomStream mStream;
