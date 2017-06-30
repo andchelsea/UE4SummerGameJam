@@ -20,8 +20,6 @@ enum class AIstate : uint8
  class Weapon;
  */
 
-
-
 UCLASS()
 class TESTVR_API AMonsterAIController : public AAIController
 {

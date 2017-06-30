@@ -19,6 +19,11 @@ AMonsterAIController::AMonsterAIController()
 
 void AMonsterAIController::Possess(APawn * InPawn)
 {
+	Super::Possess(InPawn);
+
+
+	//mOwner = Cast<AMonsterAIController>(InPawn);
+
 }
 
 void AMonsterAIController::BeginInactiveState()
