@@ -6,9 +6,13 @@
 void UsharpeningWidget::Activate(float diff)
 {
 	isActive = true;
-	currPositionRandomizer = mStream.FRand() * maxPositionRandomizer;
+	float currPositionRandomizer = mStream.FRand() * maxPositionRandomizer;
 	difficulty = -diff;
 	totalPenetration = 0.f;
+
+	mLeftWidgetPosition = currPositionRandomizer + 50;
+	mRightWidgetPosition = currPositionRandomizer + 450 + difficulty;
+	
 }
 
 void UsharpeningWidget::Deactivate()
@@ -23,5 +27,27 @@ void UsharpeningWidget::AddPenetration(float pen)
 
 float UsharpeningWidget::GetQuality()
 {
+	float startGreenPoint = 960.f + mLeftWidgetPosition + 66.66f;
+	float endGreenPoint = 960.f + mRightWidgetPosition - 66.66f;
+
+	float startYellowPoint = startGreenPoint - 140.0f;
+	float endYellowPoint = endGreenPoint + 140.0f;
+	
+
+	if (totalPenetration >= startYellowPoint && totalPenetration < startGreenPoint)
+	{
+		return (totalPenetration - startYellowPoint) / (startGreenPoint - startYellowPoint);
+	}
+
+	else if (totalPenetration >= startGreenPoint && totalPenetration <= endGreenPoint)
+	{
+		return 1.f;
+	}
+
+	else if (totalPenetration > endGreenPoint && totalPenetration <= endYellowPoint)
+	{
+		return 1.f - (totalPenetration - endGreenPoint) / (endYellowPoint - endGreenPoint);
+	}
+
 	return 0.f;
 }
