@@ -5,12 +5,11 @@
 
 // Sets default values
 AItem::AItem()
+	: mState(ItemState::kOre)
+	, mWeaponType(WeaponType::kNone)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	mState = ItemState::kOre;
-	mMaterialType = (MaterialType)FMath::RandRange(0, (int)MaterialType::kMax);
-
 }
 
 // Called when the game starts or when spawned
@@ -39,15 +38,17 @@ void AItem::Tick(float DeltaTime)
 //	mMesh->SetSimulatePhysics(true);
 //}
 
-bool AItem::SetIngot()
+bool AItem::IncreaseHeat(float heat)
 {
-	if (mState == ItemState::kOre)
-	{
-		mState = ItemState::kIngot;
-		return true;
-	}
-	return false;
+	mCurrentHeat += heat;
+	return mCurrentHeat >= maxHeatRequired && mState == ItemState::kOre;
 }
+
+void AItem::CalculateIngotQuality()
+{
+	mItemQuality -= ((mCurrentHeat - maxHeatRequired)*qualityDecreaseRate) * 0.01f;
+}
+
 
 //void AItem::SetWeapon(WeaponType type)
 //{

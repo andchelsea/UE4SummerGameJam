@@ -15,7 +15,7 @@ AFurnace::AFurnace()
 void AFurnace::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	mOre.Reserve(maxOre);
 }
 
 // Called every frame
@@ -23,7 +23,7 @@ void AFurnace::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	mCurrentHeat -= DeltaTime;
+	mCurrentHeat -= DeltaTime * heatDecreaseMultiplier;
 
 	if (mCurrentHeat <= 0.f)
 	{
@@ -31,11 +31,14 @@ void AFurnace::Tick(float DeltaTime)
 		return;
 	}
 	
-	int numItems = mOre.Num();
-
-	for (int i = 0; i < numItems; ++i)
+	for (auto ore : mOre)
 	{
-		//mWeapons[i].IncreaseHeatLevel(DeltaTime);
+		if (ore->IncreaseHeat(DeltaTime * heatDecreaseMultiplier))
+		{
+			ore->SetState(ItemState::kIngot);
+			ore->SetToIngot();
+		}
+		
 	}
 
 }
@@ -45,3 +48,27 @@ void AFurnace::Activate()
 	mCurrentHeat = maxHeat;
 }
 
+void AFurnace::AddOre(AItem* item)
+{
+	if (item->GetState() != ItemState::kOre  || mOre.Num() >= maxOre)
+	{
+		// TODO: return item back to starting point?
+		return;
+	}
+
+	mOre.Add(item);
+	item->furnaceId = mOre.Num() - 1;
+}
+
+void AFurnace::RemoveItem(AItem* item)
+{
+	if (item->furnaceId != -1)
+	{
+		mOre.RemoveAt(item->furnaceId);
+		item->furnaceId = -1;
+		if (item->GetState() == ItemState::kIngot)
+		{
+			item->CalculateIngotQuality();
+		}
+	}
+}
