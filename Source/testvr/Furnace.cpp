@@ -31,9 +31,9 @@ void AFurnace::Tick(float DeltaTime)
 		return;
 	}
 	
-	int numWeapons = mOre.Num();
+	int numItems = mOre.Num();
 
-	for (int i = 0; i < numWeapons; ++i)
+	for (int i = 0; i < numItems; ++i)
 	{
 		//mWeapons[i].IncreaseHeatLevel(DeltaTime);
 	}

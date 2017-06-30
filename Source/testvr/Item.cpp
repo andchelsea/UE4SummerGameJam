@@ -39,9 +39,11 @@ void AItem::Release()
 	mMesh->SetSimulatePhysics(true);
 }
 
-void AItem::SetBar()
+void AItem::SetIngot(USkeletalMeshComponent* mesh, UMaterialInstanceDynamic* material)
 {
 	mState = ItemState::kIngot;
+	mMesh = mesh;
+	mMaterial = material;
 }
 
 void AItem::SetWeapon(WeaponType type)

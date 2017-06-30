@@ -48,6 +48,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Upgrade)
 	int maxHeatIncrease;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ItemReferences)
+	TArray<USkeletalMeshComponent*> mIngots;
+
 private:
 	float mCurrentHeat = 0;
 	TArray<AItem*> mOre;

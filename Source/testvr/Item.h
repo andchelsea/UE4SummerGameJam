@@ -55,7 +55,7 @@ public:
 	virtual void Release() override;
 
 	//Change Item States
-	void SetBar();
+	void SetIngot(USkeletalMeshComponent* mMesh, UMaterialInstanceDynamic* mMaterial);
 	void SetWeapon(WeaponType type);
 
 protected:
@@ -65,7 +65,7 @@ protected:
 	float mItemQuality;
 
 	UPROPERTY(EditAnywhere)
-	UMaterialInterface* mMaterial;
+	UMaterialInstanceDynamic* mMaterial;
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* mMesh;
 	
