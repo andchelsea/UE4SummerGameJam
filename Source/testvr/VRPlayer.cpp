@@ -4,7 +4,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
-
+#include "MotionControllerComponent.h"
 // Sets default values
 AVRPlayer::AVRPlayer()
 {
@@ -24,7 +24,7 @@ void AVRPlayer::BeginPlay()
 void AVRPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 // Called to bind functionality to input
@@ -33,14 +33,10 @@ void AVRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
+	 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AVRPlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AVRPlayer::MoveRight);
 
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	//PlayerInputComponent->BindAxis("TurnRate", this, &AVRPlayer::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	//PlayerInputComponent->BindAxis("LookUpRate", this, &AVRPlayer::LookUpAtRate);
 }
 
 void AVRPlayer::MoveForward(float value)
