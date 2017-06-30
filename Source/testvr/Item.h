@@ -28,9 +28,13 @@ enum class WeaponType
 
 enum class ItemState
 {
+	kOre,
 	kSmelting,
+	kIngot,
 	kForging,
+	kDullWeapon,
 	kSharpening,
+	kSharpWeapon,
 	kMax
 };
 
@@ -65,5 +69,8 @@ protected:
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* mMesh;
 	
+	ItemState mState;
+	WeaponType mWeaponType;
+	Material mMaterialType;
 
 };
