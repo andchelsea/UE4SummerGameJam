@@ -8,6 +8,8 @@ AItem::AItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	mState = ItemState::kOre;
+	mMaterialType = (MaterialType)FMath::RandRange(0, (int)MaterialType::kMax);
 
 }
 
@@ -25,23 +27,29 @@ void AItem::Tick(float DeltaTime)
 
 }
 
-void AItem::Grab(USceneComponent* controller)
+//void AItem::Grab(USceneComponent* controller)
+//{
+//	mMesh->SetSimulatePhysics(false);
+//	AttachRootComponentTo(controller);
+//}
+//
+//void AItem::Release()
+//{
+//	DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, false));
+//	mMesh->SetSimulatePhysics(true);
+//}
+
+bool AItem::SetIngot()
 {
-	mMesh->SetSimulatePhysics(false);
-	AttachRootComponentTo(controller);
+	if (mState == ItemState::kOre)
+	{
+		mState = ItemState::kIngot;
+		return true;
+	}
+	return false;
 }
 
-void AItem::Release()
-{
-	DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, false));
-	mMesh->SetSimulatePhysics(true);
-}
-
-void AItem::SetBar()
-{
-}
-
-void AItem::SetWeapon(WeaponType type)
-{
-}
+//void AItem::SetWeapon(WeaponType type)
+//{
+//}
 
