@@ -36,5 +36,8 @@ public:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 	//AIstate mCurrentState;
 
+	//UFUNCTION(BlueprintCallable)
+		void AngerMonster();
+
 	class Weapon* mDesiredWeapon;
 };

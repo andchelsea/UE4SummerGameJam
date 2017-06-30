@@ -30,4 +30,8 @@ void AMonsterAIController::BeginInactiveState()
 {
 }
 
+void AMonsterAIController::AngerMonster()
+{
+}
+
 
