@@ -9,7 +9,8 @@
 #include "Item.generated.h"
 
 // Example Materials
-enum class Material
+UENUM(Blueprintable)
+enum class MaterialType : uint8
 {
 	kCopper,
 	kIron,
@@ -18,7 +19,8 @@ enum class Material
 };
 
 // Example Weapons
-enum class WeaponType
+UENUM(Blueprintable)
+enum class WeaponType : uint8
 {
 	kSword,
 	kAxe,
@@ -26,7 +28,8 @@ enum class WeaponType
 	kMax
 };
 
-enum class ItemState
+UENUM(Blueprintable)
+enum class ItemState : uint8
 {
 	kOre,
 	kSmelting,
@@ -50,27 +53,27 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Grabbing
-	virtual void Grab(USceneComponent* controller) override;
-	virtual void Release() override;
-
 	//Change Item States
-	void SetIngot(USkeletalMeshComponent* mMesh, UMaterialInstanceDynamic* mMaterial);
-	void SetWeapon(WeaponType type);
+
+	UFUNCTION(BlueprintCallable)
+	bool SetIngot();
+	//UFUNCTION(BlueprintCallable)
+	//void SetWeapon(WeaponType type);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	float mItemQuality;
-
-	UPROPERTY(EditAnywhere)
-	UMaterialInstanceDynamic* mMaterial;
-	UPROPERTY(EditAnywhere)
-	USkeletalMeshComponent* mMesh;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	ItemState mState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	WeaponType mWeaponType;
-	Material mMaterialType;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+	MaterialType mMaterialType;
 
 };
