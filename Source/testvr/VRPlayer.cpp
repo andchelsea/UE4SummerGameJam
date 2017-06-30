@@ -31,11 +31,11 @@ void AVRPlayer::Tick(float DeltaTime)
 void AVRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	//PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	//PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	 
-	PlayerInputComponent->BindAxis("MoveForward", this, &AVRPlayer::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AVRPlayer::MoveRight);
+	//PlayerInputComponent->BindAxis("MoveForward", this, &AVRPlayer::MoveForward);
+	//PlayerInputComponent->BindAxis("MoveRight", this, &AVRPlayer::MoveRight);
 
 }
 
