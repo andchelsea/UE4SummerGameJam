@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/Core/Public/Containers/Array.h"
-#include "Weapon.h"
+#include "Item.h"
 #include "Furnace.generated.h"
 
 UCLASS()
@@ -50,6 +50,6 @@ public:
 
 private:
 	float mCurrentHeat = 0;
-	TArray<AWeapon> mWeapons;
+	TArray<AItem*> mOre;
 	
 };

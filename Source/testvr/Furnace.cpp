@@ -31,7 +31,7 @@ void AFurnace::Tick(float DeltaTime)
 		return;
 	}
 	
-	int numWeapons = mWeapons.Num();
+	int numWeapons = mOre.Num();
 
 	for (int i = 0; i < numWeapons; ++i)
 	{
