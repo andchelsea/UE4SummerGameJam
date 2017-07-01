@@ -19,7 +19,11 @@ class TESTVR_API AMonsterAIController : public AAIController
 	virtual void BeginInactiveState() override;
 
 	class AMonster* mOwner;
-	//class AVRPlayer* mPlayer;
+
+	//Blackboard variables
+	uint8 StallID;
+	uint8 ExitPosID;
+	uint8 StateEnum;
 
 public:
 	UFUNCTION(BlueprintCallable)
