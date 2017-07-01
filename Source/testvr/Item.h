@@ -71,6 +71,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentHeatPercentage() { return mCurrentHeat / maxHeatRequired; }
 
+	UFUNCTION(BlueprintCallable)
+	bool IsInFurnace() { return furnaceId > -1; }
+
 	int furnaceId = -1;
 
 	// increases heat and returns if can change to ingot.

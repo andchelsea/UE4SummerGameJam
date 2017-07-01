@@ -13,10 +13,11 @@ UCLASS()
 class TESTVR_API UItemHeatWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float heatPercentage = 0.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool isActive;
+	bool isActive = false;
 };
