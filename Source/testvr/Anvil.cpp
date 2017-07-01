@@ -2,15 +2,29 @@
 
 #include "Anvil.h"
 #include "Components/BoxComponent.h"
+#include "Sound/SoundBase.h"
+#include "Components/AudioComponent.h"
 
 // Sets default values
 AAnvil::AAnvil()
-	//: noteSpawnArea(CreateDefaultSubobject<UBoxComponent>(TEXT("Note Spawn Area")))
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//noteSpawnArea->SetupAttachment(RootComponent);
+	audioComponentHit = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Component Hit"));
+	audioComponentHit->bAutoActivate = false;
+	audioComponentHit->SetupAttachment(RootComponent);
+	audioComponentHit->SetRelativeLocation(FVector(0.0f, 0.0f, 55.0f));
+
+	if (hammerHitSound->IsValidLowLevelFast())
+	{
+		audioComponentHit->SetSound(hammerHitSound);
+	}
+
+	audioComponentSong = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Component Song"));
+	audioComponentSong->bAutoActivate = false;
+	audioComponentSong->SetupAttachment(RootComponent);
+	audioComponentSong->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }
 
 // Called when the game starts or when spawned
@@ -19,11 +33,18 @@ void AAnvil::BeginPlay()
 	Super::BeginPlay();
 
 	// Initialize note pool to 10 items
-	//noteObjects.AddDefaulted(10);
 	for (int i = 0; i < 10; ++i)
 	{
-		noteObjects.Add(NewObject<AAnvilNote>());
+		FVector spawnLocation(0.0f, 0.0f, 0.0f);
+		FRotator spawnRotation(0.0f, 0.0f, 0.0f);
+		FActorSpawnParameters spawnInfo;
+		spawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		AAnvilNote* note = GetWorld()->SpawnActor<AAnvilNote>(noteObj, spawnLocation, spawnRotation, spawnInfo);
+		note->Deactivate();
+		noteObjects.Add(note);
 	}
+
+	//StartGame();
 }
 
 // Called every frame
@@ -39,22 +60,23 @@ void AAnvil::Tick(float DeltaTime)
 		if (nextNote < weapons[selectedWeapon].notes.Num())
 		{
 			// Check for next note spawn
-			if (timePassed > weapons[selectedWeapon].notes[nextNote])
+			if (timePassed > (weapons[selectedWeapon].notes[nextNote] - 1.5f))
 			{
 				// Spawn a note
-				float x = (2.0f * noteSpawnLength * rand() / (float)RAND_MAX);
-				float y = (2.0f * noteSpawnWidth * rand() / (float)RAND_MAX);
+				float x = (2.0f * noteSpawnLength * rand() / (float)RAND_MAX) - noteSpawnLength;
+				float y = (2.0f * noteSpawnWidth * rand() / (float)RAND_MAX) - noteSpawnWidth;
 				float z = noteSpawnHeight;
-				noteObjects[nextNoteToSpawn]->TeleportTo(FVector(x, y, z), FRotator());
+				noteObjects[nextNoteToSpawn]->TeleportTo(GetActorLocation() + FVector(x, y, z), FRotator());
 
 				noteObjects[nextNoteToSpawn]->Activate();
 
+				nextNoteToSpawn = (nextNoteToSpawn + 1) % 10;
 				++nextNote;
 
 				// Make sure we dont go over the max number of notes
 				if (nextNote < weapons[selectedWeapon].notes.Num())
 				{
-					nextNoteTime = weapons[selectedWeapon].notes[nextNote] * weapons[selectedWeapon].secondsPerBeat;
+					//nextNoteTime = weapons[selectedWeapon].startTime + weapons[selectedWeapon].notes[nextNote] * weapons[selectedWeapon].secondsPerBeat - 0.0f;// noteObjects[nextNoteToSpawn]->hitTime;
 				}
 			}
 		}
@@ -74,6 +96,8 @@ void AAnvil::Tick(float DeltaTime)
 				score += noteScore;
 				
 				noteObjects[i]->Deactivate();
+
+				audioComponentHit->Play();
 			}
 
 			// Check if it has expired
@@ -86,7 +110,7 @@ void AAnvil::Tick(float DeltaTime)
 		// Stop the game
 		if (timePassed > weapons[selectedWeapon].duration)
 		{
-			isGamePlaying = false;
+			StopGame();
 		}
 	}
 }
@@ -98,8 +122,27 @@ void AAnvil::StartGame()
 	timePassed = 0.0f;
 	score = 0.0f;
 
-	nextNoteTime = weapons[selectedWeapon].notes[0] * weapons[selectedWeapon].secondsPerBeat;
+	//nextNoteTime = nextNoteTime = weapons[selectedWeapon].startTime + weapons[selectedWeapon].notes[0] * weapons[selectedWeapon].secondsPerBeat - 0.0f;// noteObjects[0]->hitTime;
 
 	// Start song
-	//weapons[selectedWeapon].song
+	if (weapons[selectedWeapon].song->IsValidLowLevelFast())
+	{
+		audioComponentSong->SetSound(weapons[selectedWeapon].song);
+		audioComponentSong->Play();
+	}
+}
+
+void AAnvil::StopGame()
+{
+	isGamePlaying = false;
+
+	audioComponentSong->Stop();
+
+	for (int32_t i = 0; i < 10; ++i)
+	{
+		if (noteObjects[i]->active)
+		{
+			noteObjects[i]->Deactivate();
+		}
+	}
 }
