@@ -33,7 +33,7 @@ void AHammer::Tick(float DeltaTime)
 
 		if (timeSinceDropped > 2.0f)
 		{
-			SetActorTransform(initialTransform);
+			TeleportTo(initialTransform.GetLocation(), initialTransform.GetRotation().Rotator());
 		}
 	}
 	else // High, not held
