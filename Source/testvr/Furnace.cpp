@@ -72,3 +72,8 @@ void AFurnace::RemoveItem(AItem* item)
 		}
 	}
 }
+
+float AFurnace::GetCurrentHeatPercentage()
+{
+	return mCurrentHeat / maxHeat;
+}

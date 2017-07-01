@@ -1,42 +1,25 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AnvilNote.h"
+#include "OreSpawner.h"
 
 
 // Sets default values
-AAnvilNote::AAnvilNote()
+AOreSpawner::AOreSpawner()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
-void AAnvilNote::Activate()
-{
-	//PrimaryActorTick.bCanEverTick = true;
-	SetActorHiddenInGame(false);
-	active = true;
-	timePassed = 0.0f;
-}
-
-void AAnvilNote::Deactivate()
-{
-	//PrimaryActorTick.bCanEverTick = false;
-	SetActorHiddenInGame(true);
-	active = false;
-}
-
 // Called when the game starts or when spawned
-void AAnvilNote::BeginPlay()
+void AOreSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AAnvilNote::Tick(float DeltaTime)
+void AOreSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-

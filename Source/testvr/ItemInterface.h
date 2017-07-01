@@ -24,11 +24,5 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Ore State")
 		void SetToIngot();
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Global")
-		void Pickup(USceneComponent* attachTo);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Global")
-		void Drop();
 };
 
