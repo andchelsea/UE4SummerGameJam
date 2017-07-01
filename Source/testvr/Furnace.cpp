@@ -15,7 +15,8 @@ AFurnace::AFurnace()
 void AFurnace::BeginPlay()
 {
 	Super::BeginPlay();
-	mOre.Reserve(maxOre);
+	// TODO - limit
+	mOre.AddDefaulted(10);
 }
 
 // Called every frame
@@ -50,21 +51,30 @@ void AFurnace::Activate()
 
 bool AFurnace::AddOre(AItem* item)
 {
-	if (item->GetState() != ItemState::kOre  || mOre.Num() >= maxOre)
+	if (item->GetState() != ItemState::kOre  || mNumOres >= maxOre)
 	{
 		return false;
 	}
 
-	mOre.Add(item);
-	item->furnaceId = mOre.Num() - 1;
-	return true;
+	mNumOres++;
+
+	for (int i = 0; i < maxOre; ++i)
+	{
+		if (mOre[i] == nullptr)
+		{
+			mOre[i] = item;
+			item->furnaceId = i;
+			return true;
+		}
+	}
+	return false;
 }
 
 void AFurnace::RemoveItem(AItem* item)
 {
 	if (item->furnaceId != -1)
 	{
-		mOre.RemoveAt(item->furnaceId);
+		mOre[item->furnaceId] = nullptr;
 		item->furnaceId = -1;
 		if (item->GetState() == ItemState::kIngot)
 		{

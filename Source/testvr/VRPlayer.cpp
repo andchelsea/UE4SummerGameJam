@@ -22,7 +22,7 @@ void AVRPlayer::BeginPlay()
 
 void AVRPlayer::LoseReputation()
 {
-
+	Reputation -= 15;
 }
 
 // Called every frame
