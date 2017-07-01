@@ -40,5 +40,6 @@ void AHammer::Tick(float DeltaTime)
 	{
 		timeSinceDropped = 0.0f;
 	}
+
 }
 
