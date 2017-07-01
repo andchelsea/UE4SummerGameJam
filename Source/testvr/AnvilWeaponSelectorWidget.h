@@ -16,5 +16,6 @@ class TESTVR_API UAnvilWeaponSelectorWidget : public UUserWidget
 	
 public:
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isActive = false;
 };

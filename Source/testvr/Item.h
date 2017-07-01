@@ -22,10 +22,10 @@ enum class MaterialType : uint8
 UENUM(Blueprintable)
 enum class WeaponType : uint8
 {
-	kNone,
 	kSword,
-	kAxe,
 	kLance,
+	kAxe,
+	kNone,
 	kMax
 };
 
