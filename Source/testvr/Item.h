@@ -14,7 +14,7 @@ enum class MaterialType : uint8
 {
 	kCopper,
 	kIron,
-	kSteel,
+	kGold,
 	kMax
 };
 
