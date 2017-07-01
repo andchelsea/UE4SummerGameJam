@@ -35,7 +35,7 @@ public:
 	void RemoveItem(AItem* item);
 
 	UFUNCTION(BlueprintCallable)
-	float GetCurrentHeatPercentage() { return mCurrentHeat / maxHeat; }
+		float GetCurrentHeatPercentage();
 
 public:
 
