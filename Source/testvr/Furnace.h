@@ -29,13 +29,17 @@ public:
 	void Activate();
 
 	UFUNCTION(BlueprintCallable)
-	void AddOre(AItem* item);
+	bool AddOre(AItem* item);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItem(AItem* item);
 
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentHeatPercentage();
+
+	
+	UFUNCTION(BlueprintCallable)
+	int GetNumItems() {	return mOre.Num(); }
 
 public:
 

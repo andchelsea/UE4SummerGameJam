@@ -48,16 +48,16 @@ void AFurnace::Activate()
 	mCurrentHeat = maxHeat;
 }
 
-void AFurnace::AddOre(AItem* item)
+bool AFurnace::AddOre(AItem* item)
 {
 	if (item->GetState() != ItemState::kOre  || mOre.Num() >= maxOre)
 	{
-		// TODO: return item back to starting point?
-		return;
+		return false;
 	}
 
 	mOre.Add(item);
 	item->furnaceId = mOre.Num() - 1;
+	return true;
 }
 
 void AFurnace::RemoveItem(AItem* item)

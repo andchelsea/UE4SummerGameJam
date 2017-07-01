@@ -115,12 +115,17 @@ void AAnvil::Tick(float DeltaTime)
 	}
 }
 
-void AAnvil::StartGame()
+void AAnvil::StartGame(WeaponType type)
 {
 	// Set variables
 	isGamePlaying = true;
+	widgetsActive = false;
 	timePassed = 0.0f;
 	score = 0.0f;
+
+	weaponType = type;
+
+	selectedWeapon = static_cast<int>(type);
 
 	//nextNoteTime = nextNoteTime = weapons[selectedWeapon].startTime + weapons[selectedWeapon].notes[0] * weapons[selectedWeapon].secondsPerBeat - 0.0f;// noteObjects[0]->hitTime;
 

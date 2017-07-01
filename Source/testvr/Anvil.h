@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "AnvilNote.h"
 #include "AnvilSongData.h"
+#include "Item.h"
 #include "Anvil.generated.h"
 
 UCLASS()
@@ -18,7 +19,9 @@ public:
 	AAnvil();
 
 	UFUNCTION(BlueprintCallable)
-	void StartGame();
+	void StartGame(WeaponType type);
+
+	UFUNCTION(BlueprintCallable)
 	void StopGame();
 
 protected:
@@ -40,8 +43,13 @@ public:
 
 protected:
 	
-	int32_t selectedWeapon;
-	int32_t nextNote = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int selectedWeapon = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	WeaponType weaponType;
+
+	int nextNote = 0;
 	float nextNoteTime = 0.0f;
 	float timePassed = 0.0f;
 	float score = 0.0f;
@@ -63,4 +71,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AItem* ingotOnAnvil;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool widgetsActive = false;
 };

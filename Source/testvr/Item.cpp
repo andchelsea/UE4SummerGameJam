@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Item.h"
-
+#include "Engine.h"
 
 // Sets default values
 AItem::AItem()
@@ -47,6 +47,11 @@ bool AItem::IncreaseHeat(float heat)
 void AItem::CalculateIngotQuality()
 {
 	mItemQuality -= ((mCurrentHeat - maxHeatRequired)*qualityDecreaseRate) * 0.01f;
+}
+
+void AItem::SetToIngot_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "item c++ called");
 }
 
 

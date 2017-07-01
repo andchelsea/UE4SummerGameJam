@@ -14,7 +14,7 @@ enum class MaterialType : uint8
 {
 	kCopper,
 	kIron,
-	kSteel,
+	kGold,
 	kMax
 };
 
@@ -22,10 +22,10 @@ enum class MaterialType : uint8
 UENUM(Blueprintable)
 enum class WeaponType : uint8
 {
-	kNone,
 	kSword,
-	kAxe,
 	kLance,
+	kAxe,
+	kNone,
 	kMax
 };
 
@@ -79,6 +79,15 @@ public:
 	// increases heat and returns if can change to ingot.
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
+
+	// Grind State
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GrindState)
+	float grindAmount = 0.0f;
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
+	void SetToIngot();
+
+	virtual void SetToIngot_Implementation() override;
 
 private:	
 	float mCurrentHeat = 0.f;
