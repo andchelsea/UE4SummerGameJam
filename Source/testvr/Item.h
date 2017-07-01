@@ -80,15 +80,13 @@ public:
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UMaterialInstanceDynamic* mDynamicMat;
-
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
 
 	virtual void SetToIngot_Implementation() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+	ItemState mState;
 
 private:	
 	float mCurrentHeat = 0.f;
@@ -123,6 +121,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	ItemState GetState() { return mState; }
 	UFUNCTION(BlueprintCallable)
+	float GetProcess() { return mProcessAmount; }
+	UFUNCTION(BlueprintCallable)
+	float GetCrack() { return mCrackAmount; }
+	UFUNCTION(BlueprintCallable)
 	WeaponType GetWeaponType() { return mWeaponType; }
 	UFUNCTION(BlueprintCallable)
 	MaterialType GetMaterialType() { return mMaterialType; }
@@ -133,7 +135,6 @@ public:
 protected:
 
 	float mItemQuality = 1.f;
-	ItemState mState;
 	WeaponType mWeaponType;
 	MaterialType mMaterialType;
 	bool mIsGrabbed = false;
