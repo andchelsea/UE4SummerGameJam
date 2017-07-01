@@ -33,11 +33,8 @@ UENUM(Blueprintable)
 enum class ItemState : uint8
 {
 	kOre,
-	kSmelting,
 	kIngot,
-	kForging,
 	kDullWeapon,
-	kSharpening,
 	kSharpWeapon,
 	kMax
 };

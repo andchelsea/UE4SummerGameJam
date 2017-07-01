@@ -27,7 +27,7 @@ void AHammer::Tick(float DeltaTime)
 	{
 		timeSinceDropped = 0.0f;
 	}
-	else if (GetActorLocation() != initialTransform.TransformPosition)
+	else if (GetActorLocation() != initialTransform.GetLocation())
 	{
 		timeSinceDropped += DeltaTime;
 
