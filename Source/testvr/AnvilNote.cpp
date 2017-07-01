@@ -13,17 +13,16 @@ AAnvilNote::AAnvilNote()
 
 void AAnvilNote::Activate()
 {
-	PrimaryActorTick.bCanEverTick = true;
-	bHidden = false;
+	//PrimaryActorTick.bCanEverTick = true;
+	SetActorHiddenInGame(false);
 	active = true;
-
 	timePassed = 0.0f;
 }
 
 void AAnvilNote::Deactivate()
 {
-	PrimaryActorTick.bCanEverTick = false;
-	bHidden = true;
+	//PrimaryActorTick.bCanEverTick = false;
+	SetActorHiddenInGame(true);
 	active = false;
 }
 
