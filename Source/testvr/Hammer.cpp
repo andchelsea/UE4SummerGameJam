@@ -23,22 +23,22 @@ void AHammer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (isHeld)
-	{
-		timeSinceDropped = 0.0f;
-	}
-	else if (GetActorLocation() != initialTransform.TransformPosition)
-	{
-		timeSinceDropped += DeltaTime;
-
-		if (timeSinceDropped > 2.0f)
-		{
-			TeleportTo(initialTransform.GetLocation(), initialTransform.GetRotation().Rotator());
-		}
-	}
-	else // High, not held
-	{
-		timeSinceDropped = 0.0f;
-	}
+//	if (isHeld)
+//	{
+//		timeSinceDropped = 0.0f;
+//	}
+//	else if (GetActorLocation() != initialTransform.TransformPosition)
+//	{
+//		timeSinceDropped += DeltaTime;
+//
+//		if (timeSinceDropped > 2.0f)
+//		{
+//			TeleportTo(initialTransform.GetLocation(), initialTransform.GetRotation().Rotator());
+//		}
+//	}
+//	else // High, not held
+//	{
+//		timeSinceDropped = 0.0f;
+//	}
 }
 

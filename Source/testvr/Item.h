@@ -74,6 +74,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IsInFurnace() { return furnaceId > -1; }
 
+	UFUNCTION(BlueprintCallable)
+	int GetFurnaceSlot() { return furnaceId; }
+
 	int furnaceId = -1;
 
 	// increases heat and returns if can change to ingot.

@@ -38,7 +38,7 @@ public:
 	float GetCurrentHeatPercentage();
 
 	UFUNCTION(BlueprintCallable)
-	int GetNumItems() {	return mOre.Num(); }
+	int GetNumItems() {	return mNumOres; }
 
 public:
 
@@ -60,10 +60,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Upgrade)
 	float maxHeatIncrease = 20.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<AItem*> potentialOres;
+
+	UFUNCTION(BlueprintCallable)
+	void RemovePotentialOre(int index);
+
 private:
 	float mCurrentHeat = 0;
-	TArray<AItem*> mOre;
-
-	float mNumOres;
+	TArray<AItem*> mOre;	
+	int mNumOres = 0;
 	
 };
