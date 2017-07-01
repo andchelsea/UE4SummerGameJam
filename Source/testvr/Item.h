@@ -80,6 +80,8 @@ public:
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ItemState mState;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -133,7 +135,7 @@ public:
 protected:
 
 	float mItemQuality = 1.f;
-	ItemState mState;
+
 	WeaponType mWeaponType;
 	MaterialType mMaterialType;
 	bool mIsGrabbed = false;
