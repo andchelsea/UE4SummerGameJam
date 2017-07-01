@@ -24,8 +24,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float timeSinceDropped = 0.0f;
+	float timeSinceDropped = 0.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isHeld = false;
+
+	FTransform initialTransform;
 };
