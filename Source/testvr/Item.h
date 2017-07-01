@@ -80,6 +80,10 @@ public:
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
+	// Grind State
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GrindState)
+	float grindAmount = 0.0f;
+
 private:	
 	float mCurrentHeat = 0.f;
 
