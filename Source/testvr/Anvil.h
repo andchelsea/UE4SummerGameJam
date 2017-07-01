@@ -60,5 +60,7 @@ protected:
 	class UClass* noteObj;
 	TArray<AAnvilNote*> noteObjects;
 	int32_t nextNoteToSpawn = 0;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AItem* ingotOnAnvil;
 };

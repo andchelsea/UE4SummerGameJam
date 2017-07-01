@@ -13,7 +13,7 @@ AAnvilNote::AAnvilNote()
 
 void AAnvilNote::Activate()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	//PrimaryActorTick.bCanEverTick = true;
 	bHidden = false;
 	active = true;
 
@@ -22,7 +22,7 @@ void AAnvilNote::Activate()
 
 void AAnvilNote::Deactivate()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	//PrimaryActorTick.bCanEverTick = false;
 	bHidden = true;
 	active = false;
 }
