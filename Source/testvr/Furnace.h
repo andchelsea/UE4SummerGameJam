@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveItem(AItem* item);
 
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentHeatPercentage() { return mCurrentHeat / maxHeat; }
+
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Furnace)

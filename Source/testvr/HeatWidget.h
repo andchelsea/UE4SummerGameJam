@@ -14,8 +14,7 @@ class TESTVR_API UHeatWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
-public:
-	
+public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float heatPercentage = 0;
 };

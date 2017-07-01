@@ -68,6 +68,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
 	float qualityDecreaseRate = 1.f; // Per 1.f extra heat.
 
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentHeatPercentage() { return mCurrentHeat / maxHeatRequired; }
+
 	int furnaceId = -1;
 
 	// increases heat and returns if can change to ingot.
@@ -93,6 +96,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponType(WeaponType type) { mWeaponType = type; }
 	UFUNCTION(BlueprintCallable)
+	void SetMaterialType(MaterialType type) { mMaterialType = type; }
+	UFUNCTION(BlueprintCallable)
 	void SetGrab(bool grab) { mIsGrabbed = grab; }
 
 	// Getters
@@ -102,6 +107,8 @@ public:
 	ItemState GetState() { return mState; }
 	UFUNCTION(BlueprintCallable)
 	WeaponType GetWeaponType() { return mWeaponType; }
+	UFUNCTION(BlueprintCallable)
+	MaterialType GetMaterialType() { return mMaterialType; }
 	UFUNCTION(BlueprintCallable)
 	bool GetGrab() { return mIsGrabbed; }
 
