@@ -37,7 +37,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentHeatPercentage();
 
-	
 	UFUNCTION(BlueprintCallable)
 	int GetNumItems() {	return mOre.Num(); }
 
@@ -64,5 +63,7 @@ public:
 private:
 	float mCurrentHeat = 0;
 	TArray<AItem*> mOre;
+
+	float mNumOres;
 	
 };
