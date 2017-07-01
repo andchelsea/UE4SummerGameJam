@@ -10,7 +10,7 @@ AVRPlayer::AVRPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	Reputation = 50;
 }
 
 // Called when the game starts or when spawned
@@ -18,6 +18,11 @@ void AVRPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AVRPlayer::LoseReputation()
+{
+
 }
 
 // Called every frame

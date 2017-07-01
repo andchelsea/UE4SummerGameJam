@@ -19,7 +19,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	float Reputation;
 public:	
+	UFUNCTION(BlueprintCallable)
+		void LoseReputation();
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
