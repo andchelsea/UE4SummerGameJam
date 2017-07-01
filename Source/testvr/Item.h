@@ -83,6 +83,11 @@ public:
 	// Grind State
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GrindState)
 	float grindAmount = 0.0f;
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
+	void SetToIngot();
+
+	virtual void SetToIngot_Implementation() override;
 
 private:	
 	float mCurrentHeat = 0.f;
