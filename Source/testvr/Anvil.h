@@ -19,6 +19,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void StartGame();
+	void StopGame();
 
 protected:
 	// Called when the game starts or when spawned
@@ -45,13 +46,18 @@ protected:
 	float timePassed = 0.0f;
 	float score = 0.0f;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	//class UBoxComponent* noteSpawnArea;
+	float noteSpawnHeight = 55.0f;
+	float noteSpawnWidth = 40.0f;
+	float noteSpawnLength = 30.0f;
 
-	float noteSpawnHeight = 90.0f;
-	float noteSpawnWidth = 20.0f;
-	float noteSpawnLength = 20.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USoundBase* hammerHitSound;
 
+	class UAudioComponent* audioComponentHit;
+	class UAudioComponent* audioComponentSong;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class UClass* noteObj;
 	TArray<AAnvilNote*> noteObjects;
 	int32_t nextNoteToSpawn = 0;
 	

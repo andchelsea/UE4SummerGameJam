@@ -21,7 +21,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float beatsPerMinute = 120.0f;
 
-	float secondsPerBeat = 0.5f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float secondsPerBeat = 0.4285714286f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float startTime = 0.0f;

@@ -36,7 +36,7 @@ public:
 	float totalTime = 2.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool active = false;
+	bool active = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool hit = false;
