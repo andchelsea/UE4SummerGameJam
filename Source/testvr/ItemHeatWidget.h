@@ -4,17 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "HeatWidget.generated.h"
+#include "ItemHeatWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TESTVR_API UHeatWidget : public UUserWidget
+class TESTVR_API UItemHeatWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
-public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float heatPercentage = 0.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isActive;
 };
