@@ -1,17 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "MonsterAIController.h"
-
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
-
+#include "VRPlayer.h"
+#include "MonsterAIController.h"
 
 AMonsterAIController::AMonsterAIController()
-	//:mBlackboard(CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackBoard")))
-	//, mBehaviortree(CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTree")))
+	:mBlackboard(CreateOptionalDefaultSubobject<UBlackboardComponent>(TEXT("BlackBoard")))
+	, mBehaviortree(CreateOptionalDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTree")))
 {
-	//AddInstanceComponent(mBlackboard);
-	//AddOwnedComponent(mBehaviortree);
+	AddInstanceComponent(mBlackboard);
+	AddOwnedComponent(mBehaviortree);
 
 	//bWantsPlayerState = true;
 	PrimaryActorTick.bCanEverTick = true;
@@ -21,9 +20,7 @@ void AMonsterAIController::Possess(APawn * InPawn)
 {
 	Super::Possess(InPawn);
 
-
 	//mOwner = Cast<AMonsterAIController>(InPawn);
-
 }
 
 void AMonsterAIController::BeginInactiveState()
