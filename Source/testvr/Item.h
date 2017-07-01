@@ -80,10 +80,11 @@ public:
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
-	// Grind State
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GrindState)
-	float grindAmount = 0.0f;
-	
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UMaterialInstanceDynamic* mDynamicMat;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
 
@@ -103,6 +104,10 @@ public:
 	// Setters
 	UFUNCTION(BlueprintCallable)
 	void SetQuality(float quality) { mItemQuality = quality; }
+	UFUNCTION(BlueprintCallable)
+	void AddProcess(float process) { mProcessAmount = FMath::Min(mProcessAmount + process, 1.0f); }
+	UFUNCTION(BlueprintCallable)
+	void AddCrack(float crack) { mCrackAmount = FMath::Min(mCrackAmount + crack, 1.0f); }
 	UFUNCTION(BlueprintCallable)
 	void SetState(ItemState state) { mState = state; }
 	UFUNCTION(BlueprintCallable)
@@ -133,4 +138,6 @@ protected:
 	MaterialType mMaterialType;
 	bool mIsGrabbed = false;
 
+	float mProcessAmount = 0.0f;
+	float mCrackAmount = 0.0f;
 };
