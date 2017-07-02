@@ -81,4 +81,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool widgetsActive = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<AItem*> ingotsInRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTransform ingotTransform;
 };

@@ -66,7 +66,14 @@ void AAnvil::Tick(float DeltaTime)
 				float x = (2.0f * noteSpawnLength * rand() / (float)RAND_MAX) - noteSpawnLength;
 				float y = (2.0f * noteSpawnWidth * rand() / (float)RAND_MAX) - noteSpawnWidth;
 				float z = noteSpawnHeight;
-				noteObjects[nextNoteToSpawn]->TeleportTo(GetActorLocation() + FVector(x, y, z), FRotator());
+
+				FVector noteOffset(x, y, z);
+
+				FTransform noteTransform = ingotTransform;
+				noteTransform.AddToTranslation(noteOffset);
+				
+				noteObjects[nextNoteToSpawn]->SetActorTransform(noteTransform, false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
+				//noteObjects[nextNoteToSpawn]->TeleportTo(GetActorLocation() + FVector(x, y, z), FRotator());
 
 				noteObjects[nextNoteToSpawn]->Activate();
 
@@ -153,6 +160,9 @@ void AAnvil::StopGame()
 		}
 	}
 
+	ingotOnAnvil->SetState(ItemState::kDullWeapon);
+	widgetsActive = false;
+	ingotsInRange.Remove(ingotOnAnvil);
 	ingotOnAnvil->SetToWeapon(score);
 	ingotOnAnvil->SetGrabbable(true);
 	isIngotPlaced = false;
