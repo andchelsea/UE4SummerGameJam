@@ -13,16 +13,19 @@ AAnvilNote::AAnvilNote()
 
 void AAnvilNote::Activate()
 {
-	//PrimaryActorTick.bCanEverTick = true;
+	SetActorTickEnabled(true);
 	SetActorHiddenInGame(false);
+	SetActorEnableCollision(true);
 	active = true;
+	hit = false;
 	timePassed = 0.0f;
 }
 
 void AAnvilNote::Deactivate()
 {
-	//PrimaryActorTick.bCanEverTick = false;
+	SetActorTickEnabled(false);
 	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
 	active = false;
 }
 

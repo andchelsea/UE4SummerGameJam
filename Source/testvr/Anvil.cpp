@@ -11,15 +11,13 @@ AAnvil::AAnvil()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
+
+	// Set up audio components
 	audioComponentHit = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Component Hit"));
 	audioComponentHit->bAutoActivate = false;
 	audioComponentHit->SetupAttachment(RootComponent);
 	audioComponentHit->SetRelativeLocation(FVector(0.0f, 0.0f, 55.0f));
-
-	if (hammerHitSound->IsValidLowLevelFast())
-	{
-		audioComponentHit->SetSound(hammerHitSound);
-	}
 
 	audioComponentSong = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Component Song"));
 	audioComponentSong->bAutoActivate = false;
@@ -53,6 +51,12 @@ void AAnvil::BeginPlay()
 		AAnvilNote* note = GetWorld()->SpawnActor<AAnvilNote>(noteObj, location, rotation, spawnInfo);
 		note->Deactivate();
 		noteObjects.Add(note);
+	}
+
+	// Assign audio component hit sound
+	if (hammerHitSound->IsValidLowLevelFast())
+	{
+		audioComponentHit->SetSound(hammerHitSound);
 	}
 
 	//StartGame(WeaponType::kSword);
