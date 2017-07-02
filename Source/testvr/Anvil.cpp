@@ -126,6 +126,7 @@ void AAnvil::StartGame(WeaponType type)
 	isGamePlaying = true;
 	widgetsActive = false;
 	timePassed = 0.0f;
+	nextNote = 0;
 	accuracy = 0.0f;
 
 	weaponType = type;
@@ -148,7 +149,7 @@ void AAnvil::StopGame()
 
 	audioComponentSong->Stop();
 
-	for (int32_t i = 0; i < 10; ++i)
+	for (int32_t i = 0; i < noteObjects.Num(); ++i)
 	{
 		if (noteObjects[i]->active)
 		{
@@ -157,7 +158,6 @@ void AAnvil::StopGame()
 	}
 
 	ingotOnAnvil->SetState(ItemState::kDullWeapon);
-	//widgetsActive = false;
 	ingotsInRange.Remove(ingotOnAnvil);
 	ingotOnAnvil->SetToWeapon(accuracy);
 	ingotOnAnvil->SetGrabbable(true);
