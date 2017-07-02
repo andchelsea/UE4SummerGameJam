@@ -88,9 +88,6 @@ public:
 	void SetToIngot();
 	virtual void SetToIngot_Implementation() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
-	ItemState mState;
-
 private:	
 	float mCurrentHeat = 0.f;
 
@@ -110,6 +107,16 @@ public:
 	float weaponQuality = 1.f; //
 
 
+// Weapon State
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+	float mProcessAmount = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+	float mCrackAmount = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
+	float grindQuality = 1.f; //
 
 // Global State
 public: 
@@ -156,16 +163,12 @@ protected:
 		WeaponType mWeaponType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
 		MaterialType mMaterialType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
-		float mProcessAmount = 0.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
-		float mCrackAmount = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+		ItemState mState;
+	
 
 	float mItemQuality = 1.f;
 
 	bool mIsGrabbed = false;
 	bool mCanBeGrabbed = true;
-
-	float mProcessAmount = 0.0f;
-	float mCrackAmount = 0.0f;
 };
