@@ -2,6 +2,7 @@
 
 #include "Monster.h"
 #include "BehaviorTree/BehaviorTree.h"
+#include "time.h"
 
 // Sets default values
 AMonster::AMonster()
@@ -11,12 +12,40 @@ AMonster::AMonster()
 	PrimaryActorTick.bCanEverTick = true;
 	//bUseRVOAvoidance = true;
 
+	srand(time(NULL));
+
 }
 
 // Called when the game starts or when spawned
 void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
+
+	switch (rand() % 3)//set weapon type
+	{
+	case 0:
+		desiredWeapon = WeaponType::kSword;
+		break;
+	case 1:
+		desiredWeapon = WeaponType::kAxe;
+		break;
+	case 2:
+		desiredWeapon = WeaponType::kLance;
+		break;
+	}
+
+	switch (rand() % 3)//set weapon material
+	{
+	case 0:
+		desiredMaterial = MaterialType::kCopper;
+		break;
+	case 1:
+		desiredMaterial = MaterialType::kGold;
+		break;
+	case 2:
+		desiredMaterial = MaterialType::kIron;
+		break;
+	}
 }
 
 // Called every frame

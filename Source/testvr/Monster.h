@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Item.h"
 #include "Monster.generated.h"
 
 UCLASS()
@@ -27,6 +28,13 @@ protected:
 	//UCharacterMovementComponent* Movement;
 
 public:	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MonsterWeapon)
+		MaterialType desiredMaterial;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MonsterWeapon)
+		WeaponType desiredWeapon;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
