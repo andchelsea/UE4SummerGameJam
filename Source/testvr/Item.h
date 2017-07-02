@@ -80,8 +80,6 @@ public:
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ItemState mState;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
@@ -136,13 +134,16 @@ public:
 
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+		WeaponType mWeaponType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+		MaterialType mMaterialType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+		float mProcessAmount = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+		float mCrackAmount = 0.0f;
 
 	float mItemQuality = 1.f;
 
-	WeaponType mWeaponType;
-	MaterialType mMaterialType;
 	bool mIsGrabbed = false;
-
-	float mProcessAmount = 0.0f;
-	float mCrackAmount = 0.0f;
 };
