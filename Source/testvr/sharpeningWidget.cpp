@@ -46,7 +46,7 @@ float UsharpeningWidget::GetQuality()
 
 	else if (totalPenetration > endGreenPoint && totalPenetration <= endYellowPoint)
 	{
-		return 1.f - (totalPenetration - endGreenPoint) / (endYellowPoint - endGreenPoint);
+		return 1.f + (totalPenetration - endGreenPoint) / (endYellowPoint - endGreenPoint);
 	}
 
 	return 0.f;

@@ -33,11 +33,8 @@ UENUM(Blueprintable)
 enum class ItemState : uint8
 {
 	kOre,
-	kSmelting,
 	kIngot,
-	kForging,
 	kDullWeapon,
-	kSharpening,
 	kSharpWeapon,
 	kMax
 };
@@ -74,20 +71,25 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IsInFurnace() { return furnaceId > -1; }
 
+	UFUNCTION(BlueprintCallable)
+	int GetFurnaceSlot() { return furnaceId; }
+
 	int furnaceId = -1;
 
 	// increases heat and returns if can change to ingot.
 	bool IncreaseHeat(float heat);
 	void CalculateIngotQuality();
 
-	// Grind State
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GrindState)
-	float grindAmount = 0.0f;
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ItemState mState;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
 
 	virtual void SetToIngot_Implementation() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+	ItemState mState;
 
 private:	
 	float mCurrentHeat = 0.f;
@@ -104,6 +106,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetQuality(float quality) { mItemQuality = quality; }
 	UFUNCTION(BlueprintCallable)
+	void AddProcess(float process) { mProcessAmount = FMath::Min(mProcessAmount + process, 1.0f); }
+	UFUNCTION(BlueprintCallable)
+	void AddCrack(float crack) { mCrackAmount = FMath::Min(mCrackAmount + crack, 1.0f); }
+	UFUNCTION(BlueprintCallable)
 	void SetState(ItemState state) { mState = state; }
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponType(WeaponType type) { mWeaponType = type; }
@@ -118,6 +124,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	ItemState GetState() { return mState; }
 	UFUNCTION(BlueprintCallable)
+	float GetProcess() { return mProcessAmount; }
+	UFUNCTION(BlueprintCallable)
+	float GetCrack() { return mCrackAmount; }
+	UFUNCTION(BlueprintCallable)
 	WeaponType GetWeaponType() { return mWeaponType; }
 	UFUNCTION(BlueprintCallable)
 	MaterialType GetMaterialType() { return mMaterialType; }
@@ -128,9 +138,11 @@ public:
 protected:
 
 	float mItemQuality = 1.f;
-	ItemState mState;
+
 	WeaponType mWeaponType;
 	MaterialType mMaterialType;
 	bool mIsGrabbed = false;
 
+	float mProcessAmount = 0.0f;
+	float mCrackAmount = 0.0f;
 };

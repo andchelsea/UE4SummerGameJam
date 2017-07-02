@@ -21,5 +21,8 @@ protected:
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;		
+	virtual void Tick(float DeltaTime) override;	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grind)
+	float grindSpeed = 1.f;
 };
