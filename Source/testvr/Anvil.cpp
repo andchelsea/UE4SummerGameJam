@@ -124,6 +124,8 @@ void AAnvil::StartGame(WeaponType type)
 	score = 0.0f;
 
 	weaponType = type;
+	ingotOnAnvil->SetWeaponType(weaponType);
+	ingotOnAnvil->SetGrabbable(false);
 
 	selectedWeapon = static_cast<int>(type);
 
@@ -150,4 +152,8 @@ void AAnvil::StopGame()
 			noteObjects[i]->Deactivate();
 		}
 	}
+
+	ingotOnAnvil->SetToWeapon(score);
+	ingotOnAnvil->SetGrabbable(true);
+	ingotOnAnvil = nullptr;
 }

@@ -65,6 +65,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
 	float qualityDecreaseRate = 1.f; // Per 1.f extra heat.
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
+	float ingotQuality = 1.f; //
+
 	UFUNCTION(BlueprintCallable)
 	float GetCurrentHeatPercentage() { return mCurrentHeat / maxHeatRequired; }
 
@@ -83,7 +86,6 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
-
 	virtual void SetToIngot_Implementation() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
@@ -95,6 +97,18 @@ private:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+// Ingot State
+public:
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
+	void SetToWeapon(float quality);
+	virtual void SetToWeapon_Implementation(float quality) override;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = OreState)
+	float weaponQuality = 1.f; //
+
 
 
 // Global State
@@ -115,6 +129,8 @@ public:
 	void SetMaterialType(MaterialType type) { mMaterialType = type; }
 	UFUNCTION(BlueprintCallable)
 	void SetGrab(bool grab) { mIsGrabbed = grab; }
+	UFUNCTION(BlueprintCallable)
+	void SetGrabbable(bool grab) { mCanBeGrabbed = grab; }
 
 	// Getters
 	UFUNCTION(BlueprintCallable)
@@ -131,6 +147,8 @@ public:
 	MaterialType GetMaterialType() { return mMaterialType; }
 	UFUNCTION(BlueprintCallable)
 	bool GetGrab() { return mIsGrabbed; }
+	UFUNCTION(BlueprintCallable)
+	bool CanBeGrabbed() { return mCanBeGrabbed; }
 
 
 protected:
@@ -141,6 +159,7 @@ protected:
 	float mItemQuality = 1.f;
 
 	bool mIsGrabbed = false;
+	bool mCanBeGrabbed = true;
 
 	float mProcessAmount = 0.0f;
 	float mCrackAmount = 0.0f;

@@ -46,13 +46,19 @@ bool AItem::IncreaseHeat(float heat)
 
 void AItem::CalculateIngotQuality()
 {
-	mItemQuality -= ((mCurrentHeat - maxHeatRequired)*qualityDecreaseRate) * 0.01f;
+	ingotQuality -= ((mCurrentHeat - maxHeatRequired)*qualityDecreaseRate) * 0.01f;
 }
 
 void AItem::SetToIngot_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "item c++ called");
 }
+
+void AItem::SetToWeapon_Implementation(float quality)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "item c++ called");
+}
+
 
 
 //void AItem::SetWeapon(WeaponType type)

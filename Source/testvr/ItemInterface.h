@@ -24,5 +24,8 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
 	void SetToIngot();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Ore State")
+	void SetToWeapon(float quality);
 };
 
