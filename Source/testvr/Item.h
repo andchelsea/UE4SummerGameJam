@@ -156,6 +156,11 @@ protected:
 		WeaponType mWeaponType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
 		MaterialType mMaterialType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+		float mProcessAmount = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grind")
+		float mCrackAmount = 0.0f;
+
 	float mItemQuality = 1.f;
 
 	bool mIsGrabbed = false;
