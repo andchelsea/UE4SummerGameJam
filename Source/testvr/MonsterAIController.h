@@ -26,8 +26,9 @@ class TESTVR_API AMonsterAIController : public AAIController
 	uint8 StateEnum;
 
 public:
-	UFUNCTION(BlueprintCallable)
-		void AngerMonster();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Monster)
+		class AItem* mDesiredWeapon;
 
-	class Weapon* mDesiredWeapon;
+	UFUNCTION(BlueprintCallable)
+		AItem* GetOrder() { return mDesiredWeapon; };
 };
