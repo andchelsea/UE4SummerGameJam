@@ -50,6 +50,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float noteSpawnLength = 30.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int gridWidth = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int gridLength = 2;
+
 
 protected:
 	
@@ -81,4 +87,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool widgetsActive = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<AItem*> ingotsInRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTransform ingotTransform;
+
+	TArray<int> noteGrid;
 };
