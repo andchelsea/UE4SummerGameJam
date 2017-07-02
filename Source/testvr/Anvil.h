@@ -41,6 +41,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isGamePlaying = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float noteSpawnHeight = 55.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float noteSpawnWidth = 40.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float noteSpawnLength = 30.0f;
+
+
 protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -54,9 +64,6 @@ protected:
 	float timePassed = 0.0f;
 	float score = 0.0f;
 
-	float noteSpawnHeight = 55.0f;
-	float noteSpawnWidth = 40.0f;
-	float noteSpawnLength = 30.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USoundBase* hammerHitSound;
