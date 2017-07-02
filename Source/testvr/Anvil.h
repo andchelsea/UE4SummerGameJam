@@ -70,7 +70,7 @@ protected:
 	int32_t nextNoteToSpawn = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class AItem* ingotOnAnvil;
+	class AItemBP* ingotOnAnvil;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool widgetsActive = false;
