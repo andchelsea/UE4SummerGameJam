@@ -25,28 +25,37 @@ AAnvil::AAnvil()
 	audioComponentSong->bAutoActivate = false;
 	audioComponentSong->SetupAttachment(RootComponent);
 	audioComponentSong->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
-
-	noteGrid.AddZeroed(gridWidth * gridLength);
 }
+
 
 // Called when the game starts or when spawned
 void AAnvil::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Initialize note pool to 10 items
-	for (int i = 0; i < 10; ++i)
+	// Initialize note pool to fit grid
+	const int gridSize = gridWidth * gridLength;
+	for (int i = 0; i < gridSize; ++i)
 	{
-		FVector spawnLocation(0.0f, 0.0f, 0.0f);
-		FRotator spawnRotation(0.0f, 0.0f, 0.0f);
+		// Between 0 and 1
+		float widthPos = (i % gridWidth) / (float)(gridWidth - 1);
+		float lengthPos = floorf(i / gridWidth) / (float)(gridLength - 1);
+
+		float x = noteSpawnWidth  * 2.0f * (widthPos  - 0.5f);
+		float y = noteSpawnLength * 2.0f * (lengthPos - 0.5f);
+		float z = noteSpawnHeight;
+
+		FVector location = ingotTransform.GetLocation() + FVector(x, y, z);
+		FRotator rotation = ingotTransform.Rotator();
 		FActorSpawnParameters spawnInfo;
 		spawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-		AAnvilNote* note = GetWorld()->SpawnActor<AAnvilNote>(noteObj, spawnLocation, spawnRotation, spawnInfo);
+
+		AAnvilNote* note = GetWorld()->SpawnActor<AAnvilNote>(noteObj, location, rotation, spawnInfo);
 		note->Deactivate();
 		noteObjects.Add(note);
 	}
 
-	//StartGame();
+	//StartGame(WeaponType::kSword);
 }
 
 // Called every frame
@@ -61,41 +70,23 @@ void AAnvil::Tick(float DeltaTime)
 		// Make sure we dont go over the max number of notes
 		if (nextNote < weapons[selectedWeapon].notes.Num())
 		{
-			// Check for next note spawn
+			// Check if the next note is ready to be spawned
 			if (timePassed > (weapons[selectedWeapon].notes[nextNote] - 1.0f))
 			{
-				//int selectedGridSpot = 0;
-				//do
-				//{
-				//
-				//} while(gridLength)
-
-				// Spawn a note
-				float x = (2.0f * noteSpawnLength * rand() / (float)RAND_MAX) - noteSpawnLength;
-				float y = (2.0f * noteSpawnWidth * rand() / (float)RAND_MAX) - noteSpawnWidth;
-				float z = noteSpawnHeight;
-
-				FVector noteOffset(x, y, z);
-
-				FTransform noteTransform = ingotTransform;
-				noteTransform.AddToTranslation(noteOffset);
-				
-				noteObjects[nextNoteToSpawn]->SetActorTransform(noteTransform, false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
-				noteObjects[nextNoteToSpawn]->Activate();
-
-				nextNoteToSpawn = (nextNoteToSpawn + 1) % 10;
-				++nextNote;
-
-
-				// Make sure we dont go over the max number of notes
-				if (nextNote < weapons[selectedWeapon].notes.Num())
+				// Find a random note that is not active
+				int selectedGridSpot = 0;
+				do
 				{
-					//nextNoteTime = weapons[selectedWeapon].startTime + weapons[selectedWeapon].notes[nextNote] * weapons[selectedWeapon].secondsPerBeat - 0.0f;// noteObjects[nextNoteToSpawn]->hitTime;
-				}
+					selectedGridSpot = rand() % noteObjects.Num();
+				} while (noteObjects[selectedGridSpot]->active);
+
+				noteObjects[selectedGridSpot]->Activate();
+
+				++nextNote;
 			}
 		}
 
-		// Check if any notes have been hit or have expired.
+		// Check if any notes have been hit or have expired
 		for (int32_t i = 0; i < noteObjects.Num(); ++i)
 		{
 			if (!noteObjects[i]->active) continue;
@@ -107,7 +98,7 @@ void AAnvil::Tick(float DeltaTime)
 
 				// Calculate score based on time accuracy
 				float noteScore = fmaxf(1.0f - timeDifference, 0.0f);
-				score += noteScore;
+				accuracy += noteScore / weapons[selectedWeapon].notes.Num();
 				
 				noteObjects[i]->Deactivate();
 
@@ -135,15 +126,13 @@ void AAnvil::StartGame(WeaponType type)
 	isGamePlaying = true;
 	widgetsActive = false;
 	timePassed = 0.0f;
-	score = 0.0f;
+	accuracy = 0.0f;
 
 	weaponType = type;
 	ingotOnAnvil->SetWeaponType(weaponType);
 	ingotOnAnvil->SetGrabbable(false);
 
 	selectedWeapon = static_cast<int>(type);
-
-	//nextNoteTime = nextNoteTime = weapons[selectedWeapon].startTime + weapons[selectedWeapon].notes[0] * weapons[selectedWeapon].secondsPerBeat - 0.0f;// noteObjects[0]->hitTime;
 
 	// Start song
 	if (weapons[selectedWeapon].song->IsValidLowLevelFast())
@@ -168,9 +157,9 @@ void AAnvil::StopGame()
 	}
 
 	ingotOnAnvil->SetState(ItemState::kDullWeapon);
-	widgetsActive = false;
+	//widgetsActive = false;
 	ingotsInRange.Remove(ingotOnAnvil);
-	ingotOnAnvil->SetToWeapon(score);
+	ingotOnAnvil->SetToWeapon(accuracy);
 	ingotOnAnvil->SetGrabbable(true);
 	isIngotPlaced = false;
 	ingotOnAnvil = nullptr;

@@ -66,9 +66,8 @@ protected:
 	WeaponType weaponType;
 
 	int nextNote = 0;
-	float nextNoteTime = 0.0f;
 	float timePassed = 0.0f;
-	float score = 0.0f;
+	float accuracy = 0.0f;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -80,7 +79,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UClass* noteObj;
 	TArray<AAnvilNote*> noteObjects;
-	int32_t nextNoteToSpawn = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AItem* ingotOnAnvil;
@@ -93,6 +91,4 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTransform ingotTransform;
-
-	TArray<int> noteGrid;
 };
