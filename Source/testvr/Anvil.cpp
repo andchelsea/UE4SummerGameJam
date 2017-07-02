@@ -25,6 +25,8 @@ AAnvil::AAnvil()
 	audioComponentSong->bAutoActivate = false;
 	audioComponentSong->SetupAttachment(RootComponent);
 	audioComponentSong->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
+
+	noteGrid.AddZeroed(gridWidth * gridLength);
 }
 
 // Called when the game starts or when spawned
@@ -60,8 +62,14 @@ void AAnvil::Tick(float DeltaTime)
 		if (nextNote < weapons[selectedWeapon].notes.Num())
 		{
 			// Check for next note spawn
-			if (timePassed > (weapons[selectedWeapon].notes[nextNote] - 1.5f))
+			if (timePassed > (weapons[selectedWeapon].notes[nextNote] - 1.0f))
 			{
+				//int selectedGridSpot = 0;
+				//do
+				//{
+				//
+				//} while(gridLength)
+
 				// Spawn a note
 				float x = (2.0f * noteSpawnLength * rand() / (float)RAND_MAX) - noteSpawnLength;
 				float y = (2.0f * noteSpawnWidth * rand() / (float)RAND_MAX) - noteSpawnWidth;
@@ -73,12 +81,11 @@ void AAnvil::Tick(float DeltaTime)
 				noteTransform.AddToTranslation(noteOffset);
 				
 				noteObjects[nextNoteToSpawn]->SetActorTransform(noteTransform, false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
-				//noteObjects[nextNoteToSpawn]->TeleportTo(GetActorLocation() + FVector(x, y, z), FRotator());
-
 				noteObjects[nextNoteToSpawn]->Activate();
 
 				nextNoteToSpawn = (nextNoteToSpawn + 1) % 10;
 				++nextNote;
+
 
 				// Make sure we dont go over the max number of notes
 				if (nextNote < weapons[selectedWeapon].notes.Num())
