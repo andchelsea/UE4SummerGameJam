@@ -25,4 +25,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grind)
 	float grindSpeed = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grind)
+	float lastIncrease = 0.0f;
 };
