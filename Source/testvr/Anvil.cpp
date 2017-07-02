@@ -155,5 +155,6 @@ void AAnvil::StopGame()
 
 	ingotOnAnvil->SetToWeapon(score);
 	ingotOnAnvil->SetGrabbable(true);
+	isIngotPlaced = false;
 	ingotOnAnvil = nullptr;
 }
