@@ -47,6 +47,7 @@ bool AItem::IncreaseHeat(float heat)
 void AItem::CalculateIngotQuality()
 {
 	ingotQuality -= ((mCurrentHeat - maxHeatRequired)*qualityDecreaseRate) * 0.01f;
+	ingotQuality = ingotQuality < 0 ? 0 : ingotQuality;
 }
 
 void AItem::SetToIngot_Implementation()
