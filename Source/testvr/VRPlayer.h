@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "SteamVRChaperoneComponent.h"
 #include "VRPlayer.generated.h"
 
 UCLASS()
@@ -32,4 +33,7 @@ public:
 
 	void MoveForward(float value);
 	void MoveRight(float value);
+
+	UPROPERTY(BlueprintReadOnly, Category = "VRPawn")
+	USteamVRChaperoneComponent* ChaperoneComponent;
 };
