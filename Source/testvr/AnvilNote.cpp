@@ -14,18 +14,21 @@ AAnvilNote::AAnvilNote()
 void AAnvilNote::Activate()
 {
 	SetActorTickEnabled(true);
-	SetActorHiddenInGame(false);
-	RootComponent->SetHiddenInGame(false, true);
+	//SetActorHiddenInGame(false);
+	//RootComponent->SetHiddenInGame(false, true);
+	RootComponent->GetChildComponent(0)->SetHiddenInGame(false, true);
 	SetActorEnableCollision(true);
 	active = true;
 	hit = false;
 	timePassed = 0.0f;
+
 }
 
 void AAnvilNote::Deactivate()
 {
 	SetActorTickEnabled(false);
 	//SetActorHiddenInGame(true);
+	RootComponent->GetChildComponent(0)->SetHiddenInGame(true, true);
 	SetActorEnableCollision(false);
 	active = false;
 }
