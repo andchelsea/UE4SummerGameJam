@@ -51,7 +51,7 @@ void AFurnace::Tick(float DeltaTime)
 
 		if (ore.IncreaseHeat(DeltaTime * heatDecreaseMultiplier))
 		{
-			ore.SetState(ItemState::kIngot);
+			ore.SetState(ItemState::Ingot);
 			ore.SetToIngot();
 		}
 		
@@ -66,7 +66,7 @@ void AFurnace::Activate()
 
 bool AFurnace::AddOre(AItem* item)
 {
-	if (item->GetState() != ItemState::kOre  || mNumOres >= maxOre)
+	if (item->GetState() != ItemState::Ore  || mNumOres >= maxOre)
 	{
 		return false;
 	}
@@ -92,7 +92,7 @@ void AFurnace::RemoveItem(AItem* item)
 		mOre[item->furnaceId] = nullptr;
 		item->furnaceId = -1;
 		mNumOres--;
-		if (item->GetState() == ItemState::kIngot)
+		if (item->GetState() == ItemState::Ingot)
 		{
 			item->CalculateIngotQuality();
 		}
