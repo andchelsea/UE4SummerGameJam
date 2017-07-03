@@ -165,6 +165,6 @@ void AAnvil::StopGame()
 	ingotsInRange.Remove(ingotOnAnvil);
 	ingotOnAnvil->SetToWeapon(accuracy);
 	ingotOnAnvil->SetGrabbable(true);
-	isIngotPlaced = false;
-	ingotOnAnvil = nullptr;
+	//isIngotPlaced = false;
+	//ingotOnAnvil = nullptr;
 }
