@@ -5,8 +5,8 @@
 
 // Sets default values
 AItem::AItem()
-	: mState(ItemState::kOre)
-	, mWeaponType(WeaponType::kNone)
+	: mState(ItemState::Ore)
+	, mWeaponType(WeaponType::None)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -41,7 +41,7 @@ void AItem::Tick(float DeltaTime)
 bool AItem::IncreaseHeat(float heat)
 {
 	mCurrentHeat += heat;
-	return mCurrentHeat >= maxHeatRequired && mState == ItemState::kOre;
+	return mCurrentHeat >= maxHeatRequired && mState == ItemState::Ore;
 }
 
 void AItem::CalculateIngotQuality()

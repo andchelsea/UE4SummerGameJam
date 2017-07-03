@@ -162,7 +162,7 @@ void AAnvil::StopGame()
 		}
 	}
 
-	ingotOnAnvil->SetState(ItemState::kDullWeapon);
+	ingotOnAnvil->SetState(ItemState::DullWeapon);
 	ingotsInRange.Remove(ingotOnAnvil);
 	ingotOnAnvil->SetToWeapon(accuracy);
 	ingotOnAnvil->SetGrabbable(true);

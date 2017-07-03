@@ -24,26 +24,26 @@ void AMonster::BeginPlay()
 	switch (rand() % 3)//set weapon type
 	{
 	case 0:
-		desiredWeapon = WeaponType::kSword;
+		desiredWeapon = WeaponType::Sword;
 		break;
 	case 1:
-		desiredWeapon = WeaponType::kAxe;
+		desiredWeapon = WeaponType::Axe;
 		break;
 	case 2:
-		desiredWeapon = WeaponType::kLance;
+		desiredWeapon = WeaponType::Sickle;
 		break;
 	}
 
 	switch (rand() % 3)//set weapon material
 	{
 	case 0:
-		desiredMaterial = MaterialType::kCopper;
+		desiredMaterial = MaterialType::Copper;
 		break;
 	case 1:
-		desiredMaterial = MaterialType::kGold;
+		desiredMaterial = MaterialType::Gold;
 		break;
 	case 2:
-		desiredMaterial = MaterialType::kIron;
+		desiredMaterial = MaterialType::Iron;
 		break;
 	}
 }

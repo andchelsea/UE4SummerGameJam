@@ -12,31 +12,31 @@
 UENUM(Blueprintable)
 enum class MaterialType : uint8
 {
-	kCopper,
-	kIron,
-	kGold,
-	kMax
+	Copper,
+	Iron,
+	Gold,
+	Max
 };
 
 // Example Weapons
 UENUM(Blueprintable)
 enum class WeaponType : uint8
 {
-	kSword,
-	kLance,
-	kAxe,
-	kNone,
-	kMax
+	Sword,
+	Sickle,
+	Axe,
+	None,
+	Max
 };
 
 UENUM(Blueprintable)
 enum class ItemState : uint8
 {
-	kOre,
-	kIngot,
-	kDullWeapon,
-	kSharpWeapon,
-	kMax
+	Ore,
+	Ingot,
+	DullWeapon,
+	SharpWeapon,
+	Max
 };
 
 UCLASS()
