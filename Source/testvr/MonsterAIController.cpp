@@ -31,8 +31,10 @@ void AMonsterAIController::Possess(APawn * InPawn)
 		StallID = mBlackboard->GetKeyID("Stall");
 		ExitPosID = mBlackboard->GetKeyID("RandomizedExitPoint");
 		StateEnum = mBlackboard->GetKeyID("CurrentState");
+		PlayerID = mBlackboard->GetKeyID("PlayerPos");
 
 		mBlackboard->SetValue<UBlackboardKeyType_Vector>(StallID, mOwner->StallLocation);
+		mBlackboard->SetValue<UBlackboardKeyType_Vector>(PlayerID, mOwner->RotateToward);
 		//mBlackboard->SetValue<UBlackboardKeyType_Enum>(StateEnum, AIstate::Entering);
 		mBehaviortree->StartTree(*mOwner->BehaviorTree);
 	}	

@@ -7,6 +7,7 @@
 // Sets default values
 AMonster::AMonster()
 	:StallLocation(230.0f ,110.0f ,0.0f)
+	,RotateToward(-95.0f ,2.0f ,140.0f)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

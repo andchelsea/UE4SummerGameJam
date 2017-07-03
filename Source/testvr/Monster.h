@@ -21,6 +21,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
 		FVector StallLocation;
+
+	UPROPERTY(EditAnywhere, Category = Behavior)
+		FVector RotateToward;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

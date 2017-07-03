@@ -24,6 +24,7 @@ class TESTVR_API AMonsterAIController : public AAIController
 	uint8 StallID;
 	uint8 ExitPosID;
 	uint8 StateEnum;
+	uint8 PlayerID;
 
 public:	
 
