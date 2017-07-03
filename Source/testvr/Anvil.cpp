@@ -113,6 +113,7 @@ void AAnvil::Tick(float DeltaTime)
 			if (noteObjects[i]->timePassed > noteObjects[i]->totalTime)
 			{
 				noteObjects[i]->Deactivate();
+				noteObjects[i]->SetActorHiddenInGame(true);
 			}
 		}
 
