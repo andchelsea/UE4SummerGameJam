@@ -14,7 +14,7 @@ AAnvilNote::AAnvilNote()
 void AAnvilNote::Activate()
 {
 	SetActorTickEnabled(true);
-	//SetActorHiddenInGame(false);
+	SetActorHiddenInGame(false);
 	RootComponent->SetHiddenInGame(false, true);
 	SetActorEnableCollision(true);
 	active = true;
