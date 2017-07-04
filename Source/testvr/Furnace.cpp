@@ -108,3 +108,16 @@ void AFurnace::RemovePotentialOre(int index)
 {
 	potentialOres.RemoveAt(index);
 }
+
+bool AFurnace::HasIngotReady()
+{
+	for (int i = 0; i < mNumOres; ++i)
+	{
+		if (mOre[i]->GetState() == ItemState::Ingot)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}

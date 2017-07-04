@@ -66,6 +66,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemovePotentialOre(int index);
 
+	UFUNCTION(BlueprintCallable)
+	bool HasIngotReady();
+
 private:
 	float mCurrentHeat = 0;
 	TArray<AItem*> mOre;	
